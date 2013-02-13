@@ -25,8 +25,12 @@ public class LanguageAPIExamplePlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        // Create the language library for this plugin
         language = new Language(this);
 
+        // You can then pull in language specific strings to use anywhere in your code
+        // The simplest just require a key (where it should be stored as in the language.yml)
+        // And a template, the default text to be displayed
         getLogger().info(language.get("enabled", "LanguageAPIExamplePlugin has been enabled"));
 
         Bukkit.getPluginManager().registerEvents(this, this);
@@ -35,6 +39,9 @@ public class LanguageAPIExamplePlugin extends JavaPlugin implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        // More complex templates can have data inserted, just add them as 
+        // additional parameters and include the index of the parameter to use
+        // in curly braces {0} to insert the value of the data at that point
         player.sendMessage(language.get("welcome", "Welcome to the server, {0}", player.getDisplayName()));
     }
     
@@ -51,6 +58,9 @@ public class LanguageAPIExamplePlugin extends JavaPlugin implements Listener {
                     player.sendMessage(language.get("wave-invalid-player", "{0} is not on the server", args[0]));
                     return true;
                 }
+                // Any number of additional dynamic data items can be inserted 
+                // into the template, just so long as there are corresponding
+                // data for every curly braced index number
                 Bukkit.broadcastMessage(language.get("wave", "{0} waves to {1}", player.getDisplayName(), target.getDisplayName()));
                 return true;
             }
