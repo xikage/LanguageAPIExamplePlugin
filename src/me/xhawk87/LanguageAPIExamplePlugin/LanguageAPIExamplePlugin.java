@@ -21,12 +21,12 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class LanguageAPIExamplePlugin extends JavaPlugin implements Listener {
 
-    private Language language;
+    private LanguageWrapper language;
 
     @Override
     public void onEnable() {
         // Create the language library for this plugin
-        language = new Language(this);
+        language = new LanguageWrapper(this);
 
         // You can then pull in language specific strings to use anywhere in your code
         // The simplest just require a key (where it should be stored as in the language.yml)
