@@ -4,7 +4,6 @@
  */
 package me.xhawk87.LanguageAPIExamplePlugin;
 
-import me.xhawk87.LanguageAPI.Language;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
