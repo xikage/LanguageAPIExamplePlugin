@@ -48,7 +48,7 @@ public class LanguageWrapper {
      */
     public String get(String key, String template, Object... params) {
         if (langObj == null) {
-            if (Bukkit.getPluginManager().isPluginEnabled("LanguageAPI")) {
+            if (Bukkit.getPluginManager().getPlugin("LanguageAPI") != null) {
                 langObj = new Language(plugin);
             }
         }

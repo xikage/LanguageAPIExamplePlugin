@@ -1,7 +1,7 @@
 name: LanguageAPIExamplePlugin
 main: me.xhawk87.LanguageAPIExamplePlugin.LanguageAPIExamplePlugin
 version: 0.1
-depends: [LanguageAPI]
+soft-depends: [LanguageAPI]
 
 commands:
   wave:
