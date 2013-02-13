@@ -1,0 +1,9 @@
+name: LanguageAPIExamplePlugin
+main: me.xhawk87.LanguageAPIExamplePlugin.LanguageAPIExamplePlugin
+version: 0.1
+depends: [LanguageAPI]
+
+commands:
+  wave:
+    description: You wave to another player
+    usage: /wave [player]
