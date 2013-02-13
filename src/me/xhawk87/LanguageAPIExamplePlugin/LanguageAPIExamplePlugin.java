@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  *
- * @author Dan
+ * @author XHawk87
  */
 public class LanguageAPIExamplePlugin extends JavaPlugin implements Listener {
 
