@@ -83,7 +83,8 @@ public class LanguageWrapper {
     }
 
     /**
-     * Taken directly from the Language class of the LanguageAPI plugin.
+     * Taken directly from the PluginLanguageLibrary class of the LanguageAPI
+     * plugin.
      *
      * Inserts the given parameters into the template at the correct locations
      * and returns the formatted string
