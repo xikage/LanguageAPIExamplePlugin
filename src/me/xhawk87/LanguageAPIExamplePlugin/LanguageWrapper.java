@@ -4,14 +4,16 @@
  */
 package me.xhawk87.LanguageAPIExamplePlugin;
 
-import me.xhawk87.LanguageAPI.Language;
+import me.xhawk87.LanguageAPI.ISOCode;
+import me.xhawk87.LanguageAPI.PluginLanguageLibrary;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
 /**
  * LanguageWrapper
- * 
- * This can be used in exactly the same way as the Language class from the 
+ *
+ * This can be used in exactly the same way as the Language class from the
  * LanguageAPI plugin, however it will still work (in the default language only)
  * if the LanguageAPI.jar is not installed.
  *
@@ -24,37 +26,57 @@ public class LanguageWrapper {
      */
     private Plugin plugin;
     /**
-     * A generalised object for holding the language library if it exists
+     * A generalised object for holding the PluginLanguageLibrary if it exists
      */
     private Object langObj;
 
     /**
      * Creates a new LanguageWrapper for the LanguageAPI plugin
-     * 
+     *
      * @param plugin Your plugin
      */
-    public LanguageWrapper(Plugin plugin) {
+    public LanguageWrapper(Plugin plugin, ISOCode pluginLocale) {
         this.plugin = plugin;
+        if (Bukkit.getPluginManager().getPlugin("LanguageAPI") != null) {
+            langObj = new PluginLanguageLibrary(plugin, pluginLocale);
+        }
     }
 
     /**
-     * A wrapper for the Language.get method. It checks if the LanguageAPI is
-     * installed, and if it is not, returns the default string instead.
-     * 
+     * A wrapper for the PluginLanguageLibrary.get method. It checks if the
+     * LanguageAPI is installed, and if it is not, returns the default string
+     * instead.
+     *
+     * @param forWhom The intended recipient to translate for
      * @param key The template key
      * @param template The default template for the plugin
      * @param params The parameters to be inserted
      * @return The formatted string
      */
-    public String get(String key, String template, Object... params) {
-        if (langObj == null) {
-            if (Bukkit.getPluginManager().getPlugin("LanguageAPI") != null) {
-                langObj = new Language(plugin);
-            }
-        }
+    public String get(CommandSender forWhom, String key, String template, Object... params) {
         if (langObj != null) {
-            Language language = (Language) langObj;
-            return language.get(key, template, params);
+            PluginLanguageLibrary language = (PluginLanguageLibrary) langObj;
+            return language.get(forWhom, key, template, params);
+        } else {
+            return compile(template, params);
+        }
+    }
+
+    /**
+     * A wrapper for the PluginLanguageLibrary.get method. It checks if the
+     * LanguageAPI is installed, and if it is not, returns the default string
+     * instead.
+     *
+     * @param preferredLocale The preferred language ISO code to translate to
+     * @param key The template key
+     * @param template The default template for the plugin
+     * @param params The parameters to be inserted
+     * @return The formatted string
+     */
+    public String get(ISOCode preferredLocale, String key, String template, Object... params) {
+        if (langObj != null) {
+            PluginLanguageLibrary language = (PluginLanguageLibrary) langObj;
+            return language.get(preferredLocale, key, template, params);
         } else {
             return compile(template, params);
         }
