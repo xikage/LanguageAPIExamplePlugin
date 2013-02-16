@@ -96,6 +96,9 @@ public class LanguageWrapper {
      * parameter index that does not exist
      */
     private static String compile(String template, Object[] params) throws IllegalArgumentException {
+        if (params.length == 0) {
+            return template; // For the sake of efficiency, don't parse templates with no dynamic data
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < template.length(); i++) {
             char c = template.charAt(i);
