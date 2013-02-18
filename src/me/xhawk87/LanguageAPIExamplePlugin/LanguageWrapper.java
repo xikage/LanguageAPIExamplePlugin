@@ -35,10 +35,10 @@ public class LanguageWrapper {
      *
      * @param plugin Your plugin
      */
-    public LanguageWrapper(Plugin plugin, ISOCode pluginLocale) {
+    public LanguageWrapper(Plugin plugin, String code) {
         this.plugin = plugin;
         if (Bukkit.getPluginManager().getPlugin("LanguageAPI") != null) {
-            langObj = new PluginLanguageLibrary(plugin, pluginLocale);
+            langObj = new PluginLanguageLibrary(plugin, ISOCode.findMatch(code));
         }
     }
 

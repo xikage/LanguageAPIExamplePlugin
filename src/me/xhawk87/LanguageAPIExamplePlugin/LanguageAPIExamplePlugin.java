@@ -26,7 +26,7 @@ public class LanguageAPIExamplePlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Create the language library for this plugin
-        language = new LanguageWrapper(this, ISOCode.eng); // English locale - Change it to whatever you code in
+        language = new LanguageWrapper(this, "eng"); // English locale - Change it to whatever you code in
 
         // You can then pull in language specific strings to use anywhere in your code
         // The simplest just require a key (where it should be stored as in the language.yml)
